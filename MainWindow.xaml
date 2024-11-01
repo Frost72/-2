@@ -1,0 +1,28 @@
+﻿<Window x:Class="чм_лаба_2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:чм_лаба_2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Введите уравнение" />
+        <TextBox x:Name="Sh" Grid.Row="1"/>
+        <Button x:Name="Start" Grid.Row="5" Content="вычислить" Click="Start_Click"/>
+        <CheckBox x:Name="MatrixMetod" Grid.Row="3" Margin="10,1,354,20"/>
+        <CheckBox x:Name="GaussMetod" Grid.Row="4" Margin="7,0,357,14"/>
+    </Grid>
+</Window>
