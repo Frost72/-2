@@ -22,8 +22,10 @@ namespace чм_лаба_2
         }
         public void Method()
         {
-            double[,] A = new double[,] { { 1, 2, 3 }, { 2, 2, 2 }, { 3, 4, 4 } };
-            double[] B = new double[] { 1, 2, 3 };
+            double[,] A = new double[,] { { 4, 12, 16 },
+            { 12, 7, 3 },
+            { 1, 3, 8 } };
+            double[] B = new double[] { 5, 7, 9 };
             int n = A.GetLength(0);
             if (MatrixMetod.IsChecked == true)
             {
@@ -49,12 +51,27 @@ namespace чм_лаба_2
                     Sh.Text = "Ошибка: " + ex.Message;
                 }
             }
+            if (SquareMethod.IsChecked == true)
+            {
+               
+                    try
+                    {
+                        double[] result = Matrix.SquareSolve(A, B);
+                        Sh.Text = string.Join(", ", result.Select((value, index) => $"x{index + 1} = {value:F2}"));
+                    }
+                    catch (Exception ex)
+                    {
+                        Sh.Text = "Ошибка: " + ex.Message;
+                    }
+                
+            }
         }
 
-        private void Start_Click(object sender, RoutedEventArgs e)
-        {
+            private void Start_Click(object sender, RoutedEventArgs e)
+            {
 
-            Method();
+                Method();
+            }
         }
     }
-}
+

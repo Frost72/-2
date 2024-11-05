@@ -141,35 +141,132 @@ namespace чм_лаба_2
 
             return x;
         }
-        public static double[,] Transposition(double[,] A)
-        {
-            int n = A.GetLength(0);
-            int m = A.GetLength(1);
-            double[,] result = new double[n, m];
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = 0; j < m; j++)
-                {
-                    result[j, i] = A[i, j];
-                }
-            }
-            return result;
-        }
-        //public static double[] SquareMethod(double[,] A)
+
+        //public static double[,] Transposition(double[,] A)
         //{
         //    int n = A.GetLength(0);
         //    int m = A.GetLength(1);
-        //    double[,] Ta = Transposition(A);
-        //    double[] result = new double[n];
+        //    double[,] Ta = new double[m, n];
         //    for (int i = 0; i < n; i++)
         //    {
         //        for (int j = 0; j < m; j++)
         //        {
-        //            A *
+        //            Ta[j, i] = A[i, j];
         //        }
         //    }
+        //    return Ta;
+        //}
+        //public static double[,] SquareMethod(double[,] A)
+        //{
+        //    int n = A.GetLength(0);
+        //    int m = A.GetLength(1);
+        //    double[,] Ta = Transposition(A);
+        //    double[,] r = new double[n, n];
+
+        //    for (int i = 0; i < n; i++)
+        //    {
+        //        for (int j = 0; j < n; j++)
+        //        {
+        //            for (int k = 0; k < m; k++)
+        //            {
+        //                r[i, j] += A[i, k] * Ta[k, j]; 
+        //            }
+        //        }
+        //    }
+        //    return r;
 
         //}
+        public static double[,] SquareMethod(double[,] A)
+        {
+            int n = A.GetLength(0);
+            double[,] L = new double[n, n];
+
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j <= i; j++)
+                {
+                    // Сумма для диагональных элементов
+                    double sum = 0;
+                    for (int k = 0; k < j; k++)
+                    {
+                        sum += L[i, k] * L[j, k];
+                    }
+
+                    // Для диагональных элементов
+                    if (i == j)
+                    {
+                        double value = A[i, i] - sum;
+                        if (value < 0)
+                        {
+                            throw new InvalidOperationException("Матрица не положительно определена.");
+                        }
+                        L[i, j] = Math.Sqrt(value);
+                    }
+                    else
+                    {
+                        // Для недиагональных элементов
+                        L[i, j] = (A[i, j] - sum) / L[j, j];
+                    }
+                }
+            }
+
+            return L;
+        }
+
+        // Метод для решения системы Ly = b
+        public static double[] ForwardSubstitution(double[,] L, double[] B)
+        {
+            int n = L.GetLength(0);
+            double[] y = new double[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                double sum = 0;
+                for (int j = 0; j < i; j++)
+                {
+                    sum += L[i, j] * y[j];
+                }
+                y[i] = (B[i] - sum) / L[i, i];
+            }
+
+            return y;
+        }
+
+        // Метод для решения системы L^T x = y
+        public static double[] BackwardSubstitution(double[,] L, double[] y)
+        {
+            int n = L.GetLength(0);
+            double[] x = new double[n];
+
+            for (int i = n - 1; i >= 0; i--)
+            {
+                double sum = 0;
+                for (int j = i + 1; j < n; j++)
+                {
+                    sum += L[j, i] * x[j];
+                }
+                x[i] = (y[i] - sum) / L[i, i];
+            }
+
+            return x;
+        }
+        // Метод для решения СЛАУ с использованием разложения Холецкого
+        public static double[] SquareSolve(double[,] A, double[] B)
+        {
+           
+                // Получаем нижнюю треугольную матрицу L
+                double[,] L = SquareMethod(A);
+
+                // Решаем систему Ly = b
+                double[] y = ForwardSubstitution(L, B);
+
+                // Решаем систему L^T x = y
+                double[] x = BackwardSubstitution(L, y);
+
+                return x;
+            
+            
+        }
 
     }
 }

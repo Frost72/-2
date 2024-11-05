@@ -23,6 +23,10 @@
         <TextBox x:Name="Sh" Grid.Row="1"/>
         <Button x:Name="Start" Grid.Row="5" Content="вычислить" Click="Start_Click"/>
         <CheckBox x:Name="MatrixMetod" Grid.Row="3" Margin="10,1,354,20"/>
+        <Label Content="Матричный метод" Grid.Row="3"  Margin="43,10,231,0" Height="30"/>
         <CheckBox x:Name="GaussMetod" Grid.Row="4" Margin="7,0,357,14"/>
+        <Label Content="Метод Гаусса" Grid.Row="4"  Margin="25,2,249,8"/>
+        <CheckBox x:Name="SquareMethod" Grid.Row="4" Margin="133,0,231,14"/>
+        <Label Content="Метод квадратных корней" Width="300" Height="30" Grid.ColumnSpan="2" Margin="151,35,349,15" Grid.RowSpan="2" Grid.Row="3"/>
     </Grid>
 </Window>
