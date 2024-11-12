@@ -271,4 +271,3 @@ namespace чм_лаба_2
     }
 }
 
-//ryriyfukfkufkuf
