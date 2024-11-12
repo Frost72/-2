@@ -140,40 +140,7 @@ namespace чм_лаба_2
             return x;
         }
 
-        //public static double[,] Transposition(double[,] A)
-        //{
-        //    int n = A.GetLength(0);
-        //    int m = A.GetLength(1);
-        //    double[,] Ta = new double[m, n];
-        //    for (int i = 0; i < n; i++)
-        //    {
-        //        for (int j = 0; j < m; j++)
-        //        {
-        //            Ta[j, i] = A[i, j];
-        //        }
-        //    }
-        //    return Ta;
-        //}
-        //public static double[,] SquareMethod(double[,] A)
-        //{
-        //    int n = A.GetLength(0);
-        //    int m = A.GetLength(1);
-        //    double[,] Ta = Transposition(A);
-        //    double[,] r = new double[n, n];
-
-        //    for (int i = 0; i < n; i++)
-        //    {
-        //        for (int j = 0; j < n; j++)
-        //        {
-        //            for (int k = 0; k < m; k++)
-        //            {
-        //                r[i, j] += A[i, k] * Ta[k, j]; 
-        //            }
-        //        }
-        //    }
-        //    return r;
-
-        //}
+        
         public static double[,] SquareMethod(double[,] A)
         {
             int n = A.GetLength(0);
@@ -265,6 +232,59 @@ namespace чм_лаба_2
             
             
         }
+        public  static double[] GausseJordan(double[,] A, double[] B,int n)
+        {
+            
+            // Добавление свободных членов в матрицу A
+            double[,] augmentedMatrix = new double[n, n + 1];
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    augmentedMatrix[i, j] = A[i, j];
+                }
+                augmentedMatrix[i, n] = B[i]; // последний столбец - это B
+            }
+
+            // Прямой ход
+            for (int i = 0; i < n; i++)
+            {
+                double maxEl = Math.Abs(augmentedMatrix[i, i]);
+                int maxRow = i;
+                for (int k = i + 1; k < n; k++)
+                {
+                    if (Math.Abs(augmentedMatrix[k, i]) > maxEl)
+                    {
+                        maxEl = Math.Abs(augmentedMatrix[k, i]);
+                        maxRow = k;
+                    }
+                }
+
+                // Обмен текущей строки с максимальной строкой
+                for (int k = i; k < n + 1; k++)
+                {
+                    double tmp = augmentedMatrix[maxRow, k];
+                    augmentedMatrix[maxRow, k] = augmentedMatrix[i, k];
+                    augmentedMatrix[i, k] = tmp;
+                }
+
+                // Обнуление под текущей строкой
+                for (int k = i + 1; k < n; k++)
+                {
+                    double c = -augmentedMatrix[k, i] / augmentedMatrix[i, i];
+                    for (int j = i; j < n + 1; j++)
+                    {
+                        if (i == j)
+                        {
+                            augmentedMatrix[k, j] = 0;
+                        }
+                        else
+                        {
+                            augmentedMatrix[k, j] += c * augmentedMatrix[i, j];
+                        }
+                    }
+                }
+            }
 
     }
 }
