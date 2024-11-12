@@ -22,8 +22,8 @@ namespace чм_лаба_2
         }
         public void Method()
         {
-            double[,] A = new double[,] { { 4, 12, 16 },
-            { 12, 7, 3 },
+            double[,] A = new double[,] { { 17, 12, 16 },
+            { 12, 16, 3 },
             { 1, 3, 8 } };
             double[] B = new double[] { 5, 7, 9 };
             int n = A.GetLength(0);
@@ -65,7 +65,23 @@ namespace чм_лаба_2
                     }
                 
             }
+            if (ZeydelMethod.IsChecked == true)
+            {
+
+                try
+                {
+                    double[] result = Matrix.ZeydelMethod(A, B);
+                    Sh.Text = string.Join(", ", result.Select((value, index) => $"x{index + 1} = {value:F2}"));
+                }
+                catch (Exception ex)
+                {
+                    Sh.Text = "Ошибка: " + ex.Message;
+                }
+
+            }
+
         }
+        
 
             private void Start_Click(object sender, RoutedEventArgs e)
             {

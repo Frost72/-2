@@ -253,21 +253,67 @@ namespace чм_лаба_2
         // Метод для решения СЛАУ с использованием разложения Холецкого
         public static double[] SquareSolve(double[,] A, double[] B)
         {
-           
-                // Получаем нижнюю треугольную матрицу L
-                double[,] L = SquareMethod(A);
 
-                // Решаем систему Ly = b
-                double[] y = ForwardSubstitution(L, B);
+            // Получаем нижнюю треугольную матрицу L
+            double[,] L = SquareMethod(A);
 
-                // Решаем систему L^T x = y
-                double[] x = BackwardSubstitution(L, y);
+            // Решаем систему Ly = b
+            double[] y = ForwardSubstitution(L, B);
 
-                return x;
-            
-            
+            // Решаем систему L^T x = y
+            double[] x = BackwardSubstitution(L, y);
+
+            return x;
+
+
         }
 
+        public static double[] ZeydelMethod(double[,] A, double[] B)
+        {
+
+            double[] x = new double[B.Length]; // Начальное приближение
+            double epsilon = 1e-10; // Допустимая погрешность
+            int maxIterations = 1000; // Максимальное количество итераций
+
+            for (int k = 0; k < maxIterations; k++)
+            {
+                double[] xOld = (double[])x.Clone(); // Копируем текущее приближение
+
+                for (int i = 0; i < B.Length; i++)
+                {
+                    double sum = B[i];
+                    for (int j = 0; j < B.Length; j++)
+                    {
+                        if (j != i)
+                        {
+                            sum -= A[i, j] * x[j];
+                        }
+                    }
+                    x[i] = sum / A[i, i];
+                }
+
+                // Проверка на сходимость
+                double maxDiff = 0;
+                for (int i = 0; i < B.Length; i++)
+                {
+                    maxDiff = Math.Max(maxDiff, Math.Abs(x[i] - xOld[i]));
+                }
+
+                if (maxDiff < epsilon)
+                {
+                    Console.WriteLine($"Решение найдено за {k + 1} итераций:");
+                    for (int i = 0; i < B.Length; i++)
+                    {
+                        Console.WriteLine($"x[{i}] = {x[i]}");
+                    }
+                    return x;
+                }
+            }
+
+            Console.WriteLine("Достигнуто максимальное количество итераций.");
+            return x;
+        }
     }
 }
+
 
