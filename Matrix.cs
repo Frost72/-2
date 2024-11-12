@@ -10,13 +10,11 @@ namespace чм_лаба_2
     {
         public double[,] A { get; set; }
         public double[] B { get; set; }
-        public int R { get; set; }
 
-        public Matrix(double[,] a, double[] b, int r)
+        public Matrix(double[,] a, double[] b)
         {
             A = a;
             B = b;
-            R = r;
         }
 
         public static double[] SolveLinearSystem(double[,] A, double[] B)
