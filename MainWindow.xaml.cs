@@ -79,6 +79,20 @@ namespace чм_лаба_2
                 }
 
             }
+            if (GaussJordan.IsChecked == true)
+            {
+
+                try
+                {
+                    double[] result = Matrix.GausseJordan(A, B,n);
+                    Sh.Text = string.Join(", ", result.Select((value, index) => $"x{index + 1} = {value:F2}"));
+                }
+                catch (Exception ex)
+                {
+                    Sh.Text = "Ошибка: " + ex.Message;
+                }
+
+            }
 
         }
         

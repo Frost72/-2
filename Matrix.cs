@@ -292,7 +292,6 @@ namespace чм_лаба_2
                 }
             }
 
-<<<<<<< HEAD
 
             // Решение (x) находится в последнем столбце расширенной матрицы
             double[] x = new double[n];
@@ -304,8 +303,6 @@ namespace чм_лаба_2
             return x;
         }
 
-=======
->>>>>>> 82ab68e0e49585f0ac9b3021ff4f427586f42ee0
         public static double[] ZeydelMethod(double[,] A, double[] B)
         {
 

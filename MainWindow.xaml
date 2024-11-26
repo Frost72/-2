@@ -32,5 +32,6 @@
         <CheckBox Content="Метод Гаусса" x:Name="GaussMetod" Grid.Row="4" Margin="7,0,294,14"/>
         <CheckBox Content="Метод квадратных корней" x:Name="SquareMethod" Grid.Row="4" Margin="133,0,92,14"/>
         <CheckBox Content="Метод Зейделя" x:Name="ZeydelMethod" HorizontalAlignment="Left" Margin="51,14,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.Column="1"/>
+        <CheckBox Content="Метод гаусса-Жордана" x:Name="GaussJordan" HorizontalAlignment="Left" Margin="51,14,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.Column="1" Width="155"/>
     </Grid>
 </Window>
