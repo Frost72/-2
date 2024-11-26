@@ -332,7 +332,7 @@ namespace чм_лаба_2
                 for (int i = 0; i < B.Length; i++)
                 {
                     maxDiff = Math.Max(maxDiff, Math.Abs(x[i] - xOld[i]));
-        }
+                }
 
                 if (maxDiff < epsilon)
                 {
@@ -347,8 +347,8 @@ namespace чм_лаба_2
 
             Console.WriteLine("Достигнуто максимальное количество итераций.");
             return x;
+        }
     }
-}
 }
 
 
