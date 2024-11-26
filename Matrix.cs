@@ -348,6 +348,42 @@ namespace чм_лаба_2
             Console.WriteLine("Достигнуто максимальное количество итераций.");
             return x;
         }
+        public static double[] RelaxationMethod(double[,] A, double[] B, double omega, int maxIterations = 1000, double tolerance = 1e-6)
+        {
+            int n = A.GetLength(0);
+            double[] X = new double[n]; // начальная аппроксимация решения (можно начать с 0)
+            double[] X_old = new double[n]; // для хранения предыдущего приближения
+
+            for (int k = 0; k < maxIterations; k++)
+            {
+                Array.Copy(X, X_old, n); // сохраняем текущее приближение
+
+                for (int i = 0; i < n; i++)
+                {
+                    double sum = 0;
+                    for (int j = 0; j < n; j++)
+                    {
+                        if (i != j)
+                            sum += A[i, j] * X[j];
+                    }
+                    // обновляем x[i] с использованием метода релаксации
+                    X[i] = (1 - omega) * X[i] + omega * (B[i] - sum) / A[i, i];
+                }
+
+                // проверяем, достигли ли желаемой точности
+                double maxError = 0;
+                for (int i = 0; i < n; i++)
+                {
+                    maxError = Math.Max(maxError, Math.Abs(X[i] - X_old[i]));
+                }
+
+                if (maxError < tolerance)
+                    break; // если сходимость достигнута, выходим из цикла
+            }
+
+            return X; // возвращаем решение
+        }
+
     }
 }
 
