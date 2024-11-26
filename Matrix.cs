@@ -140,7 +140,7 @@ namespace чм_лаба_2
             return x;
         }
 
-        
+
         public static double[,] SquareMethod(double[,] A)
         {
             int n = A.GetLength(0);
@@ -218,24 +218,23 @@ namespace чм_лаба_2
         // Метод для решения СЛАУ с использованием разложения Холецкого
         public static double[] SquareSolve(double[,] A, double[] B)
         {
-           
-                // Получаем нижнюю треугольную матрицу L
-                double[,] L = SquareMethod(A);
 
-                // Решаем систему Ly = b
-                double[] y = ForwardSubstitution(L, B);
+            // Получаем нижнюю треугольную матрицу L
+            double[,] L = SquareMethod(A);
 
-                // Решаем систему L^T x = y
-                double[] x = BackwardSubstitution(L, y);
+            // Решаем систему Ly = b
+            double[] y = ForwardSubstitution(L, B);
 
-                return x;
-            
-            
+            // Решаем систему L^T x = y
+            double[] x = BackwardSubstitution(L, y);
+
+            return x;
+
+
         }
-        public  static double[] GausseJordan(double[,] A, double[] B,int n)
+        public static double[] GausseJordan(double[,] A, double[] B, int n)
         {
-            
-            // Добавление свободных членов в матрицу A
+            // Добавление свободных членов в матрицу A (та же логика, что и в Solve)
             double[,] augmentedMatrix = new double[n, n + 1];
             for (int i = 0; i < n; i++)
             {
@@ -243,10 +242,10 @@ namespace чм_лаба_2
                 {
                     augmentedMatrix[i, j] = A[i, j];
                 }
-                augmentedMatrix[i, n] = B[i]; // последний столбец - это B
+                augmentedMatrix[i, n] = B[i];
             }
 
-            // Прямой ход
+            // Прямой ход (модифицированный для Гаусса-Жордана)
             for (int i = 0; i < n; i++)
             {
                 double maxEl = Math.Abs(augmentedMatrix[i, i]);
@@ -260,7 +259,7 @@ namespace чм_лаба_2
                     }
                 }
 
-                // Обмен текущей строки с максимальной строкой
+                // Обмен текущей строки с максимальной строкой (та же логика)
                 for (int k = i; k < n + 1; k++)
                 {
                     double tmp = augmentedMatrix[maxRow, k];
@@ -268,17 +267,24 @@ namespace чм_лаба_2
                     augmentedMatrix[i, k] = tmp;
                 }
 
-                // Обнуление под текущей строкой
-                for (int k = i + 1; k < n; k++)
+                // Деление строки на главный элемент (для получения 1 на диагонали)
+                double div = augmentedMatrix[i, i];
+                if (div == 0)
                 {
-                    double c = -augmentedMatrix[k, i] / augmentedMatrix[i, i];
-                    for (int j = i; j < n + 1; j++)
+                    throw new Exception("Singular matrix - no unique solution"); // Обработка вырожденной матрицы
+                }
+                for (int k = i; k <= n; k++)
+                {
+                    augmentedMatrix[i, k] /= div;
+                }
+
+                // Обнуление элементов над и под диагональю
+                for (int k = 0; k < n; k++)
+                {
+                    if (k != i)
                     {
-                        if (i == j)
-                        {
-                            augmentedMatrix[k, j] = 0;
-                        }
-                        else
+                        double c = -augmentedMatrix[k, i];
+                        for (int j = i; j <= n; j++)
                         {
                             augmentedMatrix[k, j] += c * augmentedMatrix[i, j];
                         }
@@ -286,6 +292,17 @@ namespace чм_лаба_2
                 }
             }
 
+
+            // Решение (x) находится в последнем столбце расширенной матрицы
+            double[] x = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                x[i] = augmentedMatrix[i, n];
+            }
+
+            return x;
+
+        }
     }
 }
 
