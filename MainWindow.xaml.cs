@@ -93,20 +93,7 @@ namespace чм_лаба_2
                 }
 
             }
-            if (RelaxationMethod.IsChecked == true)
-            {
-                try
-                {
-                    double omega = 1.25; // пример значения омеги, можно изменить
-                    double[] result = Matrix.RelaxationMethod(A, B, omega);
-                    Sh.Text = string.Join(", ", result.Select((value, index) => $"x{index + 1} = {value:F2}"));
-                }
-                catch (Exception ex)
-                {
-                    Sh.Text = "Ошибка: " + ex.Message;
-                }
-            }
-
+           
 
         }
 
