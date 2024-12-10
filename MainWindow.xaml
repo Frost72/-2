@@ -33,5 +33,6 @@
         <CheckBox Content="Метод квадратных корней" x:Name="SquareMethod" Grid.Row="4" Margin="133,0,92,14"/>
         <CheckBox Content="Метод Зейделя" x:Name="ZeydelMethod" HorizontalAlignment="Left" Margin="51,14,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.Column="1"/>
         <CheckBox Content="Метод гаусса-Жордана" x:Name="GaussJordan" HorizontalAlignment="Left" Margin="51,14,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.Column="1" Width="155"/>
+        <CheckBox Content="LU метод" x:Name="LU" Grid.Row="2" Grid.Column="1" Width="155" Margin="51,8,194,32" Grid.RowSpan="2" />
     </Grid>
 </Window>

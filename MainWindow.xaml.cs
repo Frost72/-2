@@ -93,6 +93,18 @@ namespace чм_лаба_2
                 }
 
             }
+            if (LU.IsChecked == true)
+            {
+                try
+                {
+                    double[] result = Matrix.LU (A,B);
+                    Sh.Text =string.Join(", ", result.Select((value, index) => $"x{index + 1} = {value:F2}"));
+                }
+                catch(Exception ex)
+                {
+                    Sh.Text = "Ошибка: " + ex.Message;
+                }
+            }
            
 
         }
@@ -103,6 +115,8 @@ namespace чм_лаба_2
 
                 Method();
             }
-        }
+
+     
+    }
     }
 

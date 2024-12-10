@@ -344,12 +344,55 @@ namespace чм_лаба_2
                     return x;
                 }
             }
+            
 
             Console.WriteLine("Достигнуто максимальное количество итераций.");
             return x;
         }
      
+        public static double[] LU( double [,] A,double[] B) 
+        {
+            int n = A.GetLength(0);
+            double[] x = new double[B.Length];
+            double[,] L = new double[n, n];
+            double[,] U = new double[n, n];
+        
 
+            for (int i = 0; i < n; i++)
+            {
+
+                for (int j = i; j < n; j++)
+                {
+                    U[i, j] = A[i, j];
+                    for (int k = 0; k < i; k++)
+                    {
+                        U[i, j] -= L[i, k] * U[k, j];
+                    }
+                }
+                for (int j = i; j < n; j++)
+                {
+                    if (i == j)
+                    {
+                        L[i, i] = 1; 
+                    }
+                    else
+                    {
+                        L[j, i] = A[j, i];
+                        for (int k = 0; k < i; k++)
+                        {
+                            L[j, i] -= L[j, k] * U[k, i];
+                        }
+                        L[j, i] /= U[i, i];
+                    }
+                }
+
+            }
+            for (int i = 0; i < B.Length; i++)
+            {
+                Console.WriteLine($"x[{i}] = {x[i]}");
+            }
+            return B;
+        }
     }
 }
 
