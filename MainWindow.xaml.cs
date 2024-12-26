@@ -93,7 +93,7 @@ namespace чм_лаба_2
                 }
 
             }
-            if (LU.IsChecked == true)
+            if (LUMethod.IsChecked == true)
             {
                 try
                 {
