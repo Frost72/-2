@@ -97,7 +97,7 @@ namespace чм_лаба_2
                 }
 
             }
-            if (LUMethod.IsChecked == true)
+            if (LU.IsChecked == true)
             {
                 Sh.Text = "";
                 try
