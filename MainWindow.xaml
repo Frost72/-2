@@ -34,8 +34,5 @@
         <CheckBox Content="Метод Зейделя" x:Name="ZeydelMethod" HorizontalAlignment="Left" Margin="51,14,0,0" Grid.Row="4" VerticalAlignment="Top" Grid.Column="1"/>
         <CheckBox Content="Метод гаусса-Жордана" x:Name="GaussJordan" HorizontalAlignment="Left" Margin="51,14,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.Column="1" Width="155"/>
         <CheckBox Content="LU метод" x:Name="LU" Grid.Row="2" Grid.Column="1" Width="155" Margin="51,8,194,32" Grid.RowSpan="2" />
-        <CheckBox Content="Метод Крамера" x:Name="Kramer" Grid.Row="2" Width="155" Margin="10,5,235,35" Grid.RowSpan="2" />
-        <CheckBox Content="Метод Прогонки" x:Name="Progon" Grid.Row="5" Width="155" Margin="51,8,194,-8" Grid.Column="1" />
-        <CheckBox Content="Метод простых итераций" x:Name="SimpleIteration" Grid.Row="1" Margin="51,10,143,30" Grid.Column="1" Grid.RowSpan="2" />
     </Grid>
 </Window>
