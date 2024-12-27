@@ -97,7 +97,7 @@ namespace чм_лаба_2
                 }
 
             }
-            if (LUMethod.IsChecked == true)
+            if (LU.IsChecked == true)
             {
                 Sh.Text = "";
                 try
@@ -251,7 +251,10 @@ namespace чм_лаба_2
                 Method();
             }
 
- 
+        private void SimpleIteration_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
     }
 
